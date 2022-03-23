@@ -25,10 +25,10 @@ There will be four main releases for each of the four project submissions: P4, P
 Contributions will be limited to the team members for the time being. We may decide to open contributions to more people as our team gains more members or with scaling. 
 
 ## Authors and acknowledgment
-Sofia Geslinger
-Edward Coleman
-Barbara Call
-Jonathan Ruxton
+Authors: Sofia Geslinger.
+Edward Coleman.
+Barbara Call.
+Jonathan Ruxton.
 
 ## Project status
 This application is incomplete. No functionality has been implemented yet. 
