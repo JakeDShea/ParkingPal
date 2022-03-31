@@ -4,10 +4,10 @@
 Parking Pal allows students to understand their parking pass and make informed choices on where they will park. It should also show information as to which parking lots have available space in them and help students avoid going to lots that are already full.
 
 ## Badges
-![logo](/images/parking_pal_logo.jpg)
-(Application Icon here.)
+<img src="/images/parking_pal_logo.jpg" width="200" height="200">
 
 ## Visuals
+<img src="/images/wireframes.jpg" width="898.666667" height="896">
 (Wireframe Images here.)
 
 ## Installation
