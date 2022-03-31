@@ -8,7 +8,6 @@ Parking Pal allows students to understand their parking pass and make informed c
 
 ## Visuals
 <img src="/images/wireframes.jpg" width="898.666667" height="896">
-(Wireframe Images here.)
 
 ## Installation
 This application may be imported to any android device as a .apk file and run within android devices. 
