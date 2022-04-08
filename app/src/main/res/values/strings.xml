@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Parking Pal</string>
+    <string name="select_permit_type">Please select your permit type</string>
+
+    <string-array name="permits_array">
+        <item>COMMUTER - DAY</item>
+        <item>RESIDENT</item>
+        <item>GRAD PLEX RESIDENT</item>
+        <item>COMMUTER - EVENING</item>
+        <item>LONG TERM STORAGE</item>
+        <item>RESTRICTED USE</item>
+        <item>CARPOOL</item>
+        <item>FACULTY/STAFF</item>
+        <item>VIMS</item>
+    </string-array>
 </resources>
