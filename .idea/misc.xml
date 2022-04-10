@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/roundbutton.xml" value="0.19" />
         <entry key="app/src/main/res/layout/activity_choose_permit.xml" value="0.10208333333333333" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11" />
-        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.11614583333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21606648199445982" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.25" />
       </map>
     </option>
   </component>
