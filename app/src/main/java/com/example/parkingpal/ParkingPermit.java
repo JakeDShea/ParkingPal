@@ -89,4 +89,20 @@ public class ParkingPermit {
 
         }
     }
+
+    /**
+     * Accessor method for expiration date field
+     * @return Date (expiration)
+     */
+    public Date getExpiration() {
+        return expiration;
+    }
+
+    /**
+     * Mutator method for expiration date field
+     * @param date
+     */
+    public void setExpirationDate(Date date) {
+        this.expiration = date;
+    }
 }
