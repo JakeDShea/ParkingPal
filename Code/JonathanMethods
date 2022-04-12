@@ -1,1 +1,45 @@
-pass
+public class GetDensityColor{
+
+    public static int getDensityColor(int occupiedSpaces, int totalSpaces){
+        // calculate the density of the lot
+        double density = (double)occupiedSpaces / (double)totalSpaces;
+
+        // decide if red or green variant 
+        boolean over50;
+        if (density > 0.5) { over50 = true; }
+        else { over50 = false; }
+
+        // set up color
+        int red = 0xFF;
+        int green = 0xFF;
+        double percentage;
+
+        // get color if red, reduce green
+        if (over50){
+            percentage = 2 * (1 - density);
+            double greenProb = 255 * percentage;
+            green = (int)greenProb;
+        }
+        // get color if green, reduce red
+        else{
+            percentage = 2 * density;
+            double redProb = 255 * percentage;
+            red = (int)redProb;
+        }
+
+        // process the color
+        red = red << 16;
+        green = green << 8;
+        return (red | green);
+    }
+
+    public static void main(String[] args) {
+        int occupied = 70;
+        int available = 100;
+
+        int color = getDensityColor(occupied, available);
+        String hex = String.format("%06X", color);
+        System.out.println(hex);
+    }
+}
+
