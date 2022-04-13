@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openMapActivity(){
         setContentView(R.layout.activity_mapscreen);
-        fragment = new Map();
+        Map fragment = new Map();
         //open fragment
         getSupportFragmentManager()
                 .beginTransaction()
