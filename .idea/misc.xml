@@ -3,13 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ellie/Documents/parkingpal/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/ellie/Documents/parkingpal/app/src/main/res/layout/activity_mapscreen.xml" value="0.5" />
-        <entry key="..\:/Users/ellie/Documents/parkingpal/app/src/main/res/layout/fragment_map.xml" value="0.1" />
-        <entry key="..\:/Users/ellie/Documents/parkingpal/app/src/main/res/layout/map.xml" value="0.1" />
-        <entry key="..\:/Users/thegr/AndroidStudioProjects/parkingpal/app/src/main/res/layout/activity_main.xml" value="0.28396739130434784" />
-        <entry key="..\:/Users/thegr/AndroidStudioProjects/parkingpal/app/src/main/res/layout/activity_mapscreen.xml" value="0.28396739130434784" />
-        <entry key="..\:/Users/thegr/AndroidStudioProjects/parkingpal/app/src/main/res/layout/fragment_map.xml" value="0.28396739130434784" />
+        <entry key="..\:/Users/Me/AndroidStudioProjects/parkingpal/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Me/AndroidStudioProjects/parkingpal/app/src/main/res/layout/activity_parking.xml" value="0.264" />
+        <entry key="app/src/main/res/drawable/roundbutton.xml" value="0.19" />
+        <entry key="app/src/main/res/layout/activity_choose_permit.xml" value="0.10208333333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21606648199445982" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.25" />
       </map>
     </option>
   </component>
