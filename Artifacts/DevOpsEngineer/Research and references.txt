@@ -1,0 +1,11 @@
+References:
+
+Google Maps Markers
+https://stackoverflow.com/questions/13692398/remove-a-marker-from-a-googlemap
+https://developers.google.com/maps/documentation/android-sdk/marker
+
+Google maps LngLat
+https://developers.google.com/maps/documentation/javascript/examples/map-latlng-literal
+
+Google maps integration (general)
+https://developers.google.com/maps/documentation/android-sdk/start
