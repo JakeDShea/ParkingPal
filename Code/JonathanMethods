@@ -1,6 +1,6 @@
+public class GetDensityColor{
 
-
-public static int getDensityColor(int occupiedSpaces, int totalSpaces){
+    public static int getDensityColor(int occupiedSpaces, int totalSpaces){
         // calculate the density of the lot
         double density = (double)occupiedSpaces / (double)totalSpaces;
 
@@ -32,3 +32,14 @@ public static int getDensityColor(int occupiedSpaces, int totalSpaces){
         green = green << 8;
         return (red | green);
     }
+
+    public static void main(String[] args) {
+        int occupied = 70;
+        int available = 100;
+
+        int color = getDensityColor(occupied, available);
+        String hex = String.format("%06X", color);
+        System.out.println(hex);
+    }
+}
+
