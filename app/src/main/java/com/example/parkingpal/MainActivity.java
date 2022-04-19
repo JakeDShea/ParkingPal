@@ -26,9 +26,13 @@ public class MainActivity extends AppCompatActivity {
     TextView tx1;
     int counter = 3;
 
+    private Button button;
+    private Button button2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // set to mapscreen rn
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
