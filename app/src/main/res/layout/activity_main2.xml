@@ -89,24 +89,21 @@
         android:layout_marginLeft="36dp"
         android:layout_marginTop="383dp"
         android:ems="10"
-        android:hint="University" />
+        android:hint="University" /><![CDATA[
 
-    <Button
-        android:id="@+id/account_info_next_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="213dp"
-        android:background="@drawable/roundbutton"
-        android:text="Next"
-        app:backgroundTint="#00573B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.747"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />/>
+    />
+
+
+
+
+
+
+
+
+
+
+
+    ]]>
 
     <Button
         android:id="@+id/login"
@@ -118,5 +115,27 @@
         android:text="or Log In"
         android:textColor="#00593D"
         android:textStyle="italic" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="-15dp">
+
+        <Button
+            android:id="@+id/account_info_next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundbutton"
+            android:text="Next"
+            app:backgroundTint="#00573B"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.924" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

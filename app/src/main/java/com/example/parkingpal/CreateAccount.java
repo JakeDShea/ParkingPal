@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.Button;
 
 public class CreateAccount extends AppCompatActivity {
+    Button b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Button b1 = (Button) findViewById(R.id.button); //back to login button
+        b1 = (Button) findViewById(R.id.login); //back to login button
 
 
         Button buttonOne = findViewById(R.id.account_info_next_button);

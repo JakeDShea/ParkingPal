@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Parking Pal</string>
-    <string name="select_permit_type">Please select your permit type</string>
+    <string name="select_permit_type">Please select your permit type:</string>
 
     <string-array name="permits_array">
         <item>COMMUTER - DAY</item>
@@ -12,5 +12,12 @@
         <item>CARPOOL</item>
         <item>FACULTY/STAFF</item>
         <item>VIMS</item>
+    </string-array>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="parking_array">
+        <item>"Compton Lot"</item>
+        <item>"Kaplan Arena"</item>
+        <item>"McGlothlin-Street Hall Parking Lot"</item>
     </string-array>
 </resources>
