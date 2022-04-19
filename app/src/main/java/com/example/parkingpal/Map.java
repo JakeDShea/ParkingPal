@@ -32,7 +32,7 @@ public class Map extends Fragment {
     private Button switchLocationsButton;
     private boolean hasAddedMarker = false;
     public String currentAddress;
-    private String kaplanAddress = "751 Ukrop Way, Williamsburg, VA 23185";
+    private final String kaplanAddress = "751 Ukrop Way, Williamsburg, VA 23185";
     private String parkingDeckAddress = "24 Ukrop Way, Williamsburg, VA 23185";
     //37.2735° N, 76.7197° W
 
@@ -125,8 +125,8 @@ public class Map extends Fragment {
     }
     public void addMarkerAtCurrentLocation(){
         parkedLocation = currentLocation;
-       if (hasAddedMarker){
-           currentMarker.setPosition(getCurrentLocation());
+        if (hasAddedMarker){
+            currentMarker.setPosition(getCurrentLocation());
             return;
         }
         String markerText = "No Location Found";
@@ -165,3 +165,4 @@ public class Map extends Fragment {
         }
     }
 }
+

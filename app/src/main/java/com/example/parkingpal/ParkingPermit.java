@@ -23,7 +23,7 @@ public class ParkingPermit {
         private final int ptype;
 
         PermitType(int type) {
-             this.ptype = type;
+            this.ptype = type;
         }
     }
 
@@ -32,26 +32,26 @@ public class ParkingPermit {
      * Accessor method for permit type
      * @return int representing permit type
      */
-     public int getType() {
-         switch(type) {
-             case RESIDENT:
-                 return 0;
-             case COMMUTER:
-                 return 1;
-             case EVENING_COMMUTER:
-                 return 2;
-             case GRADUATE:
-                 return 3;
-             case CARPOOL:
-                 return 4;
-             case RESTRICTED_USE:
-                 return 5;
-             case LONG_TERM_STORAGE:
-                 return 6;
-         }
-         // If the type is not found
-         return -1;
-     }
+    public int getType() {
+        switch(type) {
+            case RESIDENT:
+                return 0;
+            case COMMUTER:
+                return 1;
+            case EVENING_COMMUTER:
+                return 2;
+            case GRADUATE:
+                return 3;
+            case CARPOOL:
+                return 4;
+            case RESTRICTED_USE:
+                return 5;
+            case LONG_TERM_STORAGE:
+                return 6;
+        }
+        // If the type is not found
+        return -1;
+    }
 
     /**
      * ParkingPermit(int)
@@ -106,3 +106,4 @@ public class ParkingPermit {
         this.expiration = date;
     }
 }
+
