@@ -85,5 +85,35 @@
         android:layout_marginBottom="114dp"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/carsInArea"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="530dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="49dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/totalSpots"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="562dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="17dp"
+        android:text="TextView" />
+
 
 </RelativeLayout>

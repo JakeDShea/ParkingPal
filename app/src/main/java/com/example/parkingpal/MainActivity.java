@@ -1,8 +1,6 @@
 package com.example.parkingpal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,14 +30,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // set to mapscreen rn
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
-
         myRef.setValue("Hello, World!");
 
         b1 = (Button) findViewById(R.id.button); //login button
@@ -89,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openMapActivity();
+                //openMapActivity();
+                Intent intent = new Intent(MainActivity.this, MapscreenActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -100,59 +98,6 @@ public class MainActivity extends AppCompatActivity {
                 openParkActivity();
             }
         });
-
-    }
-    public void openMapActivity(){
-        setContentView(R.layout.activity_mapscreen);
-        com.example.parkingpal.Map fragment = new com.example.parkingpal.Map();
-        //open fragment
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_layout, (Fragment) fragment)
-                .commit();
-
-        Button kaplanButton = findViewById(R.id.kaplanButton);
-        Button parkingDeckButton = findViewById(R.id.parkingDeckButton);
-        Button setParkingLocation = findViewById(R.id.setParkingLocation);
-
-        View.OnClickListener kaplanButtonListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment.setCurrentLocation(com.example.parkingpal.Map.hardcodedLocations.KaplanParkingLot);
-                TextView dest = findViewById(R.id.destinationAddress);
-                dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
-
-            }
-        };
-
-        View.OnClickListener parkingDeckButtonListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment.setCurrentLocation(com.example.parkingpal.Map.hardcodedLocations.ParkingDeck);
-                TextView dest = findViewById(R.id.destinationAddress);
-                dest.setText("DESTINATION:  " + fragment.getCurrentDesinationAddress());
-            }
-        };
-
-        View.OnClickListener setParkingLocationButtonListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment.addMarkerAtCurrentLocation();
-                TextView park = findViewById(R.id.parkingAddress);
-                park.setText("PARKED: " + fragment.getCurrentParkedAddress());
-            }
-        };
-
-        kaplanButton.setOnClickListener(kaplanButtonListener);
-        parkingDeckButton.setOnClickListener(parkingDeckButtonListener);
-        setParkingLocation.setOnClickListener(setParkingLocationButtonListener);
-
-        TextView dest = findViewById(R.id.destinationAddress);
-        dest.setText("DESTINATION:  " + fragment.getCurrentDesinationAddress());
-
-        TextView park = findViewById(R.id.parkingAddress);
-        park.setText("PARKED: " + fragment.getCurrentParkedAddress());
-
 
     }
 
