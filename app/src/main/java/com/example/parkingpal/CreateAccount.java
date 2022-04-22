@@ -78,10 +78,14 @@ public class CreateAccount extends AppCompatActivity {
         password = (EditText) findViewById(R.id.Passwd);
         university = (EditText) findViewById(R.id.uni);
 
+        //Random number for account ID
         user.setID(rand.nextInt(5000));
+
+        //Inputing information from text fields into info class. Hardcode some information.
         info = new Users.Info("Williamsburg", fN.getText().toString() + " " + lN.getText().toString(), "Default", email.getText().toString(), university.getText().toString(), "Default", password.getText().toString());
         user.setInfo(info);
 
+        //Puts information into database.
         myRef.child(String.valueOf(user.getID())).setValue(user.getInfo());
     }
 }

@@ -25,6 +25,7 @@ public class Users{
         this.info = info;
     }
 
+    //Nested class so that individual info can be added to database.
     public static class Info{
         private String location;
         private String name;

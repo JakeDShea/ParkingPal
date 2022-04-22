@@ -22,6 +22,7 @@ public class ChoosePermit extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("ID");
 
+        //TODO - Connect id to exsisting id and changed the parking pass status.
 
 
         Spinner spinner = (Spinner) findViewById(R.id.permit_spinner);
