@@ -48,7 +48,7 @@
         android:hint="Last Name" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/email"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -65,7 +65,7 @@
         android:id="@+id/Passwd"
         android:layout_width="306dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editText2"
+        android:layout_below="@id/email"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -117,25 +117,29 @@
         android:textStyle="italic" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-15dp">
+        android:layout_marginStart="318dp"
+        android:layout_marginTop="433dp">
 
-        <Button
-            android:id="@+id/account_info_next_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/roundbutton"
-            android:text="Next"
-            app:backgroundTint="#00573B"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.924" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/account_info_next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uni"
+        android:layout_alignStart="@+id/uni"
+        android:layout_alignEnd="@+id/uni"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="51dp"
+        android:background="@drawable/roundbutton"
+        android:text="Next"
+        app:backgroundTint="#00573B" />
 
 </RelativeLayout>

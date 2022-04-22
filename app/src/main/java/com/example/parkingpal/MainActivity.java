@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private Button button2;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +37,13 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-        myRef.setValue("Hello, World!");
+        DatabaseReference myRef = database.getReference("Users");
+//        myRef.setValue("Hello, World!");
+
 
         b1 = (Button) findViewById(R.id.button); //login button
         ed1 = (EditText) findViewById(R.id.editText); //email
-        ed2 = (EditText) findViewById(R.id.editText2); //password
+        ed2 = (EditText) findViewById(R.id.email); //password
 
         //clicked the sign up button - take to sign up page
         b2 = (Button) findViewById(R.id.signUp); //sign up button
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     public void openParkActivity(){
         // Creates a random seed
