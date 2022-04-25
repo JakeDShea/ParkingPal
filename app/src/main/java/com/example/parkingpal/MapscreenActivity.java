@@ -16,14 +16,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MapscreenActivity extends AppCompatActivity {
-
+    com.example.parkingpal.Map fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapscreen);
 
         // Set Map Fragment on current Activity
-        com.example.parkingpal.Map fragment = new com.example.parkingpal.Map();
+        fragment = new com.example.parkingpal.Map();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_layout, (Fragment) fragment)
@@ -43,6 +43,7 @@ public class MapscreenActivity extends AppCompatActivity {
                 dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
                 getCarsInLot("Kaplan Arena");
                 getTotalSpots("Kaplan Arena");
+                updateDistance();
             }
         };
         View.OnClickListener parkingDeckButtonListener = new View.OnClickListener() {
@@ -53,6 +54,7 @@ public class MapscreenActivity extends AppCompatActivity {
                 dest.setText("DESTINATION:  " + fragment.getCurrentDesinationAddress());
                 getCarsInLot("Parking Deck");
                 getTotalSpots("Parking Deck");
+                updateDistance();
             }
         };
         View.OnClickListener setParkingLocationButtonListener = new View.OnClickListener() {
@@ -115,5 +117,12 @@ public class MapscreenActivity extends AppCompatActivity {
                 // // // // // // // // // // // // // // // // // //
             }
         });
+    }
+
+    public void updateDistance(){
+        TextView distanceText = findViewById(R.id.currentLocationCordinates);
+        float distance = fragment.getDistanceToDestinationFromCurrent(fragment.getDestinationLatLng());
+        String dist = String.valueOf(distance);
+        distanceText.setText("Distance: " + dist + " meters");
     }
 }
