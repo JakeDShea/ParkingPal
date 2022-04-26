@@ -1,0 +1,12 @@
+Android Current Location sources
+
+
+
+getting current location in program
+https://www.tutorialspoint.com/how-to-get-current-location-latitude-and-longitude-in-android
+
+https://developer.android.com/training/location/retrieve-current
+
+
+EMULTATING current location on emulator
+https://stackoverflow.com/questions/2279647/how-to-emulate-gps-location-in-the-android-emulator
