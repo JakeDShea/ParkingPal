@@ -46,12 +46,14 @@ public class Map extends Fragment {
     private hardcodedLocations parkedLocation;
     private TextView destinationAddress;
     private TextView parkingLocation;
+    private LocationTracker locationTracker;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-
+        this.locationTracker = new LocationTracker(this, this.getContext());
+        Location location = this.locationTracker.getLocation();
         // map fragment
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.google_map);
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -76,8 +78,16 @@ public class Map extends Fragment {
                         googleMap.addMarker(markerOptions);
                     }
                 }); */
+
             }
         });
+        //testing out distance function
+        this.getDistanceBetweenTwoPoints(this.kaplanParkingLot, this.parkingDeck);
+
+        //initialize location tracker
+        //Location location = this.locationTracker.getLocation();
+
+
 
         return view;
     }
@@ -122,6 +132,9 @@ public class Map extends Fragment {
     public void setCurrentLocation(hardcodedLocations newLocation){
         currentLocation = newLocation;
         moveCameraTo(getCurrentLocation());
+
+        //test
+        Location location = this.locationTracker.getLocation();
     }
     public void addMarkerAtCurrentLocation(){
         parkedLocation = currentLocation;
@@ -162,6 +175,38 @@ public class Map extends Fragment {
         }
         else{
             return "Not set";
+        }
+    }
+
+    private float[] getDistanceBetweenTwoPoints(LatLng pointOne, LatLng pointTwo){
+        float[] results = new float[1];
+        Location.distanceBetween(pointOne.latitude, pointOne.longitude,
+                pointTwo.latitude, pointTwo.longitude, results);
+
+        System.out.println(results[0]);
+        System.out.println("result is in meters");
+        return results;
+    }
+
+    public float getDistanceToDestinationFromCurrent(LatLng destination){
+        LatLng dest = new LatLng(destination.latitude, destination.longitude);
+        Location cur = this.locationTracker.getLocation();
+        if(cur == null){
+            return -1;
+        }
+        LatLng curLatLng = new LatLng(cur.getLatitude(), cur.getLongitude());
+        return getDistanceBetweenTwoPoints(curLatLng, dest)[0];
+    }
+
+    public LatLng getDestinationLatLng(){
+        if (this.currentLocation == hardcodedLocations.KaplanParkingLot){
+            return this.kaplanParkingLot;
+        }
+        else if (this.currentLocation == hardcodedLocations.ParkingDeck){
+            return this.parkingDeck;
+        }
+        else{
+            return null;
         }
     }
 }
