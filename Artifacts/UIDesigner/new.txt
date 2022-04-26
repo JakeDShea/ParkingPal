@@ -1,0 +1,7 @@
+using school colors as color palette:
+green:#115740 
+gold: #B9975B
+
+otherwise use black
+icon is in the resource file to be used
+
