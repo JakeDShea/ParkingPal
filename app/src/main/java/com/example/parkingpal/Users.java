@@ -1,5 +1,6 @@
 package com.example.parkingpal;
 
+//User class stores User information when they create an account.
 public class Users{
     private int ID;
     private Info info;

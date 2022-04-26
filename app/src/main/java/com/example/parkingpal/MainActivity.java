@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 //        myRef.setValue("Hello, World!");
 
 
+
         b1 = (Button) findViewById(R.id.button); //login button
         ed1 = (EditText) findViewById(R.id.editText); //email
         ed2 = (EditText) findViewById(R.id.email); //password
