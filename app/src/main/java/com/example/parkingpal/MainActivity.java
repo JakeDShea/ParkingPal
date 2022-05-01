@@ -77,17 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         readData(user, info.getEmail());
-                        String pass =  ed2.getText().toString();
 
-                        if(info.getPassword().equals(pass)){
-                            //This needs to change to whatever activity comes after this.
-                            //This is here to just check to see if it is working.
-                            openParkActivity();
-                        }
-
-                        else{
-                            Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
-                        }
                     }
 
                     @Override
@@ -157,6 +147,20 @@ public class MainActivity extends AppCompatActivity {
                         info.setPassword(String.valueOf(shot.child("password").getValue()));
                         info.setUniversity(String.valueOf(shot.child("university").getValue()));
                         info.setPassExpiration(String.valueOf(shot.child("passExpiration").getValue()));
+
+                        String pass =  ed2.getText().toString();
+
+                        if(info.getPassword().equals(pass)){
+                            //This needs to change to whatever activity comes after this.
+                            //This is here to just check to see if it is working.
+                            openParkActivity();
+                        }
+
+                        else{
+                            Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "User does not exsist", Toast.LENGTH_SHORT).show();
