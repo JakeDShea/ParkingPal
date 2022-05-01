@@ -2,6 +2,7 @@ package com.example.parkingpal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,11 +11,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class ChoosePermit extends AppCompatActivity {
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_permit);
+
+        //Intent to get passed ID for created user.
+        Intent intent = getIntent();
+        id = intent.getStringExtra("ID");
+
+        //TODO - Connect id to exsisting id and changed the parking pass status.
+
 
         Spinner spinner = (Spinner) findViewById(R.id.permit_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
