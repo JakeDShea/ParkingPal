@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -82,7 +81,7 @@ public class CreateAccount extends AppCompatActivity {
         rand = new Random();
         fN = (EditText) findViewById(R.id.FN);
         lN = (EditText) findViewById(R.id.LN);
-        email = (EditText) findViewById(R.id.email);
+        email = (EditText) findViewById(R.id.password);
         password = (EditText) findViewById(R.id.Passwd);
         university = (EditText) findViewById(R.id.uni);
 

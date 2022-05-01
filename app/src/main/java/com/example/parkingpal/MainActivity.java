@@ -1,33 +1,41 @@
 package com.example.parkingpal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Button b1,b2;
     EditText ed1,ed2;
+    Users user;
+    Users.Info info;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     TextView tx1;
     int counter = 3;
 
     private Button button;
     private Button button2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +44,16 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Users");
-//        myRef.setValue("Hello, World!");
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("Users");
 
-
-
-        b1 = (Button) findViewById(R.id.button); //login button
-        ed1 = (EditText) findViewById(R.id.editText); //email
-        ed2 = (EditText) findViewById(R.id.email); //password
+        b1 = (Button) findViewById(R.id.login); //login button
+        ed1 = (EditText) findViewById(R.id.id); //email
+        ed2 = (EditText) findViewById(R.id.password); //password
 
         //clicked the sign up button - take to sign up page
         b2 = (Button) findViewById(R.id.signUp); //sign up button
-        b2.setOnClickListener(new View.OnClickListener() {
+        b2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 System.out.println("Button Clicked");
@@ -59,34 +64,66 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //if log in button clicked, take them to main page....
-        b1.setOnClickListener(new View.OnClickListener() {
+        b1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ed1.getText().toString().equals("admin") &&
-                        ed2.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(),
-                            "Redirecting...", Toast.LENGTH_SHORT).show();
-                    //will need to link the login button to the home page once implemented
 
-                } else {
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                user = new Users();
+                info = new Users.Info();
+                info.setEmail(ed1.getText().toString());
 
-                    //counting to limit amount of invalid login attempts
-                    tx1.setVisibility(View.VISIBLE);
-                    tx1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
+                //Read inputted username
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        readData(user, info.getEmail());
+                        String pass =  ed2.getText().toString();
 
-                    if (counter == 0) {
-                        b1.setEnabled(false);
+                        if(info.getPassword().equals(pass)){
+                            //This needs to change to whatever activity comes after this.
+                            //This is here to just check to see if it is working.
+                            openParkActivity();
+                        }
+
+                        else{
+                            Toast.makeText(getApplicationContext(), "Invalid Password", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+//                if (ed1.getText().toString().equals("admin") &&
+//                        ed2.getText().toString().equals("admin")) {
+//                    Toast.makeText(getApplicationContext(),
+//                            "Redirecting...", Toast.LENGTH_SHORT).show();
+//                    //will need to link the login button to the home page once implemented
+//
+//                }
+//                else {
+//                    Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+//
+//                    //counting to limit amount of invalid login attempts
+//                    tx1.setVisibility(View.VISIBLE);
+//                    tx1.setBackgroundColor(Color.RED);
+//                    counter--;
+//                    tx1.setText(Integer.toString(counter));
+//
+//                    if (counter == 0) {
+//                        b1.setEnabled(false);
+//                    }
+//                }
+//
+//
             }
         });
 
 
         Button button = (Button) findViewById(R.id.to_map);
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 //openMapActivity();
@@ -96,13 +133,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button button2 = (Button) findViewById(R.id.testParkingButton);
-        button2.setOnClickListener(new View.OnClickListener() {
+        button2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 openParkActivity();
             }
         });
 
+    }
+
+    //Populates user/info class with database information.
+    public void readData(Users user, String email){
+        myRef.child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(task.getResult().exists()){
+                        Toast.makeText(getApplicationContext(), "successful Read", Toast.LENGTH_SHORT).show();
+                        DataSnapshot shot = task.getResult();
+                        info.setName(String.valueOf(shot.child("name").getValue()));
+                        info.setLocation(String.valueOf(shot.child("location").getValue()));
+                        info.setPass(String.valueOf(shot.child("pass").getValue()));
+                        info.setPassword(String.valueOf(shot.child("password").getValue()));
+                        info.setUniversity(String.valueOf(shot.child("university").getValue()));
+                        info.setPassExpiration(String.valueOf(shot.child("passExpiration").getValue()));
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "User does not exsist", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "failed to read", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
