@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         ed2.getText().toString().equals("admin")) {
                     Toast.makeText(getApplicationContext(),
                             "Redirecting...", Toast.LENGTH_SHORT).show();
-                    //will need to link the login putton to the home page once implemented
+                    //will need to link the login button to the home page once implemented
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();

@@ -16,14 +16,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MapscreenActivity extends AppCompatActivity {
-
+    com.example.parkingpal.Map fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapscreen);
 
         // Set Map Fragment on current Activity
-        com.example.parkingpal.Map fragment = new com.example.parkingpal.Map();
+        fragment = new com.example.parkingpal.Map();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame_layout, (Fragment) fragment)
@@ -38,21 +38,23 @@ public class MapscreenActivity extends AppCompatActivity {
         View.OnClickListener kaplanButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment.setCurrentLocation(com.example.parkingpal.Map.hardcodedLocations.KaplanParkingLot);
+                fragment.setCurrentLocation(Map.hardcodedLocations.KAPLAN_ARENA);
                 TextView dest = findViewById(R.id.destinationAddress);
                 dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
                 getCarsInLot("Kaplan Arena");
                 getTotalSpots("Kaplan Arena");
+                updateDistance();
             }
         };
         View.OnClickListener parkingDeckButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment.setCurrentLocation(com.example.parkingpal.Map.hardcodedLocations.ParkingDeck);
+                fragment.setCurrentLocation(Map.hardcodedLocations.PARKING_DECK);
                 TextView dest = findViewById(R.id.destinationAddress);
                 dest.setText("DESTINATION:  " + fragment.getCurrentDesinationAddress());
                 getCarsInLot("Parking Deck");
                 getTotalSpots("Parking Deck");
+                updateDistance();
             }
         };
         View.OnClickListener setParkingLocationButtonListener = new View.OnClickListener() {
@@ -76,7 +78,7 @@ public class MapscreenActivity extends AppCompatActivity {
         getCarsInLot("Kaplan Arena");
         getTotalSpots("Kaplan Arena");
 
-        }
+    }
 
     public void getCarsInLot(String lotName){
         DatabaseReference carsInArea = FirebaseDatabase.getInstance().getReference().
@@ -91,9 +93,9 @@ public class MapscreenActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-               // // // // // // // // // // // // // // // // // //
-               // TODO: ADD ERROR HANDLING (lotName not found in database)
-               // // // // // // // // // // // // // // // // // //
+                // // // // // // // // // // // // // // // // // //
+                // TODO: ADD ERROR HANDLING (lotName not found in database)
+                // // // // // // // // // // // // // // // // // //
             }
         });
     }
@@ -115,5 +117,12 @@ public class MapscreenActivity extends AppCompatActivity {
                 // // // // // // // // // // // // // // // // // //
             }
         });
+    }
+
+    public void updateDistance(){
+        TextView distanceText = findViewById(R.id.currentLocationCordinates);
+        float distance = fragment.getDistanceToDestinationFromCurrent(fragment.getDestinationLatLng());
+        String dist = String.valueOf(distance);
+        distanceText.setText("Distance: " + dist + " meters");
     }
 }

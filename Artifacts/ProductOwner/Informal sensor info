@@ -1,0 +1,11 @@
+Whole unit 
+Currently for testing purposes all sensor units are connected to the Arduino and work. The finished product will only have one type of sensing unit, leaning towards the pressure sensor. With all the units connected I had to use some trickery. So, there are delays in the Arduino code that halts some of the sensors to give time for other sensors, I didn’t want to mess with adding different threads and all that since with the final product this wouldn’t be an issue. 
+
+IR/Ultrasonic Sensor
+These sensors work similarly so I combined them together. Both these units transmit/receive and based on how long it takes for the signal to return to the device we can determine how far away something is. Which then gives distance although the calculations are a bit different, but they both return in centimeters. By knowing the distance, I set a limit to 5cm, so that anything that passes closer than 5cm will increment a count. In practice this will be set to a further distance maybe 0.5m or ~1.5 feet. The issue with this is that anything that passes within that distance will get counted and not just cars. Thus, this these wouldn’t make a good unit for sensor a car. 
+
+Pressure sensor
+This sensor works by applying pressure to the end of the plastic filament. This plastic is very sensitive to any changes to it. At one point I flicked it with my finger to see what readings I would get and got 686, a slight bend in the unit resulted in around 150. To check the program, I set it very low at once again 5. Nearly every time I touched the sensor resulted in the counter going down. This can easily be set to cars since the weight difference for a vehicle is drastically different than most things that would interact with the sensor. I think is the way we should go.
+
+Magnetic sensor
+I had plans to implement a magnetic sensor. The issue I faced was that the sensor unit I got wasn’t just a magnetic sensor, but a magnetic/gyroscope/accelerometer all combined into one unit. I tried to implement the Arduino code for just the magnetic portion, but it wouldn’t compile with the libraries I imported or anything. It’s all good anyway because the sensing range for it is very small, I was told, so it more than likely wouldn’t make a good use for our purposes. 
