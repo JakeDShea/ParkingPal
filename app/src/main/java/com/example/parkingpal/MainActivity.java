@@ -57,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                //when next button is clicked, user is brought to the screen to choose their permit type
-                Intent activity2Intent = new Intent(getApplicationContext(), CreateAccount.class);
-                startActivity(activity2Intent);
+                openCreateAccountActivity();
             }
         });
 
@@ -73,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 info.setEmail(ed1.getText().toString());
 
                 //Read inputted username
+                // currently in database:
+                // username: 1527
+                // password: 1234
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         readData(user, info.getEmail());
-
+                        openMapscreenActivity();
                     }
 
                     @Override
@@ -116,9 +117,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //openMapActivity();
-                Intent intent = new Intent(MainActivity.this, MapscreenActivity.class);
-                startActivity(intent);
+                openMapscreenActivity();
             }
         });
 
@@ -153,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
                         if(info.getPassword().equals(pass)){
                             //This needs to change to whatever activity comes after this.
                             //This is here to just check to see if it is working.
-                            openParkActivity();
+                            //openParkActivity();
+                            openMapscreenActivity();
                         }
 
                         else{
@@ -184,4 +184,18 @@ public class MainActivity extends AppCompatActivity {
         // Starts the activity
         startActivity(intent);
     }
+
+    public void openCreateAccountActivity(){
+        // Sets up the intent of this method with values to pass along
+        Intent intent = new Intent(this, CreateAccount.class);
+        // Starts the activity
+        startActivity(intent);
+    }
+
+    public void openMapscreenActivity(){
+        // Sets up the intent of this method with values to pass along
+        Intent intent = new Intent(this, MapscreenActivity.class);
+        startActivity(intent);
+    }
+
 }

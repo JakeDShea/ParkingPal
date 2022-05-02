@@ -1,8 +1,12 @@
 package com.example.parkingpal;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +19,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MapscreenActivity extends AppCompatActivity {
+    // Get the database again
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
+    ArrayList<String> lots = new ArrayList<String>();
+    com.example.parkingpal.MapscreenActivity context = this;
+
     com.example.parkingpal.Map fragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,33 +42,86 @@ public class MapscreenActivity extends AppCompatActivity {
                 .commit();
 
         // Set parking and location buttons
-        Button kaplanButton = findViewById(R.id.kaplanButton);
-        Button parkingDeckButton = findViewById(R.id.parkingDeckButton);
+        Spinner pickLot = findViewById(R.id.pickLot);
+        pickLot.setSelection(0);
         Button setParkingLocation = findViewById(R.id.setParkingLocation);
 
-        // OnClickListeners for buttons
-        View.OnClickListener kaplanButtonListener = new View.OnClickListener() {
+        (myRef.child("Parking Locations")).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                fragment.setCurrentLocation(Map.hardcodedLocations.KAPLAN_ARENA);
-                TextView dest = findViewById(R.id.destinationAddress);
-                dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
-                getCarsInLot("Kaplan Arena");
-                getTotalSpots("Kaplan Arena");
-                updateDistance();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String lotName = snapshot.getKey();
+                    lots.add(lotName);
+                    Log.v("Data", lotName);
+                }
+
+                // Sets spinner to have data
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, lots);
+                pickLot.setAdapter(adapter);
+
+                pickLot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        String lotSelected = pickLot.getSelectedItem().toString();
+
+                        Log.v("Spinner", "Text: " + lotSelected);
+
+                        // Find out how many cars are in a lot
+                        final long[] carsInArea = new long[1];
+                        final long[] totalSpots = new long[1];
+                        final double[] latitude = new double[1];
+                        final double[] longitude = new double[1];
+
+                        (myRef.child("Parking Locations").child(lotSelected)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+                                // Finds out how many cars are and can be at the specific parking spot
+                                for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
+                                    String childKey = snapshot1.getKey();
+
+                                    if(childKey.equals("CarsInArea"))
+                                        carsInArea[0] = (long) snapshot1.getValue();
+                                    else if (childKey.equals("TotalSpots"))
+                                        totalSpots[0] = (long) snapshot1.getValue();
+                                    else if (childKey.equals("Latitude"))
+                                        latitude[0] = (double) snapshot1.getValue();
+                                    else if (childKey.equals("Longitude"))
+                                        longitude[0] = (double) snapshot1.getValue();
+
+                                    Log.v("DataLot", childKey);
+                                }
+                                Log.v("PARENT LOT", dataSnapshot1.getKey());
+                                String lotName = dataSnapshot1.getKey();
+
+                                String parent = lotName.replaceAll(" ", "");
+                                String lotNameForm = parent.replaceAll("-", "");
+                                Log.v("PARENT AFTER FORMATING", lotNameForm);
+
+                                fragment.setCurrentLocation(Map.hardcodedLocations.valueOf(lotNameForm));
+                                TextView dest = findViewById(R.id.destinationAddress);
+                                dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
+                                getCarsInLot(lotName);
+                                getTotalSpots(lotName);
+                                updateDistance();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                });
             }
-        };
-        View.OnClickListener parkingDeckButtonListener = new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                fragment.setCurrentLocation(Map.hardcodedLocations.PARKING_DECK);
-                TextView dest = findViewById(R.id.destinationAddress);
-                dest.setText("DESTINATION:  " + fragment.getCurrentDesinationAddress());
-                getCarsInLot("Parking Deck");
-                getTotalSpots("Parking Deck");
-                updateDistance();
+            public void onCancelled(DatabaseError databaseError) {
+
             }
-        };
+        });
+
         View.OnClickListener setParkingLocationButtonListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,19 +131,19 @@ public class MapscreenActivity extends AppCompatActivity {
             }
         };
 
-        kaplanButton.setOnClickListener(kaplanButtonListener);
-        parkingDeckButton.setOnClickListener(parkingDeckButtonListener);
         setParkingLocation.setOnClickListener(setParkingLocationButtonListener);
 
         // Defaults
         TextView dest = findViewById(R.id.destinationAddress);
         dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
         TextView park = findViewById(R.id.parkingAddress);
-        park.setText("PARKED: " + fragment.getCurrentParkedAddress());
-        getCarsInLot("Kaplan Arena");
-        getTotalSpots("Kaplan Arena");
+        park.setText("PARKED: " + "Not Set");
+        getCarsInLot(pickLot.getSelectedItem().toString());
+        getTotalSpots(pickLot.getSelectedItem().toString());
 
     }
+
+
 
     public void getCarsInLot(String lotName){
         DatabaseReference carsInArea = FirebaseDatabase.getInstance().getReference().
@@ -123,6 +188,6 @@ public class MapscreenActivity extends AppCompatActivity {
         TextView distanceText = findViewById(R.id.currentLocationCordinates);
         float distance = fragment.getDistanceToDestinationFromCurrent(fragment.getDestinationLatLng());
         String dist = String.valueOf(distance);
-        distanceText.setText("Distance: " + dist + " meters");
+        distanceText.setText("DISTANCE: " + dist + " meters");
     }
 }

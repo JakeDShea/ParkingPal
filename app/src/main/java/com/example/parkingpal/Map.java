@@ -169,7 +169,7 @@ public class Map extends Fragment {
     private final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
     //private PlacesClient placesClient;
-    private hardcodedLocations currentLocation = hardcodedLocations.KAPLAN_ARENA;
+    private hardcodedLocations currentLocation = hardcodedLocations.KaplanArena;
     Marker currentMarker;
     private hardcodedLocations parkedLocation;
     private LocationTracker locationTracker;
@@ -224,12 +224,12 @@ public class Map extends Fragment {
     // TODO: Do we need this
     //temporarily switches between kaplan parking and parking deck on map view
     public void switchLocations(){
-        if (currentLocation == hardcodedLocations.KAPLAN_ARENA){
-            currentLocation = hardcodedLocations.PARKING_DECK;
+        if (currentLocation == hardcodedLocations.KaplanArena){
+            currentLocation = hardcodedLocations.ParkingDeck;
             switchLocationsButton.setText("GOTO: Kaplan Arena Parking");
         }
-        else if (currentLocation == hardcodedLocations.PARKING_DECK){
-            currentLocation = hardcodedLocations.KAPLAN_ARENA;
+        else if (currentLocation == hardcodedLocations.ParkingDeck){
+            currentLocation = hardcodedLocations.KaplanArena;
             switchLocationsButton.setText("GOTO: Parking Deck");
         }
 
@@ -238,70 +238,70 @@ public class Map extends Fragment {
 
     private LatLng getCurrentLocation(){
         switch (currentLocation) {
-            case BOUNDARY: currentAddress = boundaryLot;return boundaryLotCoord;
-            case JAMESTOWN: currentAddress = jamestownLot; return jamestownLotCoord;
-            case RICHMOND: currentAddress = richmondLot; return richmondLotCoord;
-            case ADAIR_GRAVE: currentAddress = adairGravelLot; return stadiumDrLotCoord;
-            case ADMISSION: currentAddress = admissionLot; return admissionLotCoord;
-            case ALUMNI_HOUSE: currentAddress = alumniHouseLot; return alumniHouseLotCoord;
-            case ARMISTEAD: currentAddress = armisteadLot; return armisteadLotCoord;
-            case BOSWELL: currentAddress = boswellLot; return boswellLotCoord;
-            case BRIDGES: currentAddress = bridgesLot; return bridgesLotCoord;
-            case BROOKS_ST: currentAddress = brooksSt; return brooksStParkingCoord;
-            case BROOKS_ST2: currentAddress = brooksSt2; return brooksStParking2Coord;
-            case BRYAN: currentAddress = bryanLot; return bryanLotCoord;
-            case CAMM: currentAddress = cammLot; return cammLotCoord;
-            case COLLEGE_TERRACE_ST: currentAddress = collegeTerraceSt; return collegeTerraceStParkingCoord;
-            case COMMONS: currentAddress = commonsLot; return commonsLotCoord;
-            case COMMUTER_HOUSE: currentAddress = commuterHouseLot; return commonsLotCoord;
-            case COMPTON: currentAddress = comptonLot; return comptonLotCoord;
-            case CORNER_HOUSE: currentAddress = cornerHouseLot; return cornerHouseLotCoord;
-            case DAWSON_CIRCLE: currentAddress = dawsonCircleLot; return dawsonCircleLotCoord;
-            case DILLARD: currentAddress = dillardLot; return dillardLotCoord;
-            case FRATERNITY_COMPLEX: currentAddress = fraternityComplexLot; return fraternityComplexLotCoord;
-            case GRAD_COMPLEX: currentAddress = gradComplexLot; return gradComplexLotCoord;
-            case GRIGSBY_DR_ST: currentAddress = grigsbyDrSt; return grigsbyDrStParkingCoord;
-            case HARRISION_AVE: currentAddress = harrisonAveLot; return harrisonAveLotCoord;
-            case HUNT_CIRCLE: currentAddress = huntCircleLot; return huntCircleLotCoord;
-            case JAMES_BLAIR_ST: currentAddress = jamesBlairDrSt; return jamesBlairDrStParkingCoord;
-            case JAMES_BLAIR: currentAddress = jamesBlairLot; return jamesBlairLotCoord;
-            case JIMMYE_LAYCOCK_CENTER: currentAddress = jimmyeLaycockCenter; return jimmyeLaycockCenterParkingCoord;
-            case JONES: currentAddress = jonesLot; return jonesLotCoord;
-            case KAPLAN_ARENA: currentAddress = kaplanArenaLot; return kaplanArenaLotCoord;
-            case KECK_LAB: currentAddress = keckLabLot; return keckLabLotCoord;
-            case KECK_LAB_RD: currentAddress = keckLabRd; return keckLabRdParkingCoord;
-            case KING_HEALTH_CENTER: currentAddress = kingHealthCenterLot; return kingHealthCenterLotCoord;
-            case LANDRUM_ST: currentAddress = landrumSt; return landrumStParkingCoord;
-            case LAW_SCHOOL: currentAddress = lawSchoolLot; return lawSchoolLotCoord;
-            case LEGACY_CIRCLE: currentAddress = legacyCircleLot; return legacyCircleLotCoord;
-            case LUDWELL: currentAddress = ludwellLot; return ludwellLotCoord;
-            case MAINTENANCE: currentAddress = maintenanceLot; return maintenanceLotCoord;
-            case MCCLURG_ST: currentAddress = mcclurgSt; return mcclurgStParkingCoord;
-            case MCCORMACK_NAGELSEN_TENNIS_CENTER: currentAddress = mccormackNagelsenTennisCenterLot; return mccormackNagelsenTennisCenterLotCoord;
-            case MCGLOTHLIN_ST_HALL: currentAddress = mcglothlinStHallLot; return mcglothlinStHallLotCoord;
-            case OLD_DOMINION: currentAddress = oldDominionLot; return oldDominionLotCoord;
-            case PARKING_DECK: currentAddress = parkingDeck; return parkingDeckCoord;
-            case PHI_BETA_KAPPA_CIRCLE: currentAddress = phiBetaKappaCircleLot; return phiBetaKappaCircleLotCoord;
-            case PLANT: currentAddress = plantLot; return plantLotCoord;
-            case PRESBYTERIAN: currentAddress = presbyterianLot; return presbyterianLotCoord;
-            case ROLFE_RD_ST: currentAddress = rolfeRdSt; return rolfeRdStParkingCoord;
-            case ROWE_HOUSE: currentAddress = roweHouseLot; return roweHouseLotCoord;
-            case SADLER_CENTER: currentAddress = sadlerCenterLot; return sadlerCenterLotCoord;
-            case SCHOOL_OF_EDUCATION: currentAddress = schoolOfEducationLot; return schoolOfEducationLotCoord;
-            case SORORITY_COURT: currentAddress = sororityCourtLot; return sororityCourtLotCoord;
-            case STADIUM_DR: currentAddress = stadiumDrLot; return stadiumDrLotCoord;
-            case SWEM_FACULTY_STAFF: currentAddress = swemFacultyStaffLot; return swemFacultyStaffLotCoord;
-            case SWEM: currentAddress = swemLot; return swemLotCoord;
-            case TRIBE_SQUARE: currentAddress = tribeSquareLot; return tribeSquareLotCoord;
-            case UKROP_WAY_ST: currentAddress = ukropWaySt; return ukropWayStParkingCoord;
-            case VIMS_RALEIGH: currentAddress = vimsRaleighLot; return vimsRaleighLotCoord;
-            case VIMS_TRIANGLE: currentAddress = vimsTriangleLot; return vimsTriangleLotCoord;
-            case WAKE_DR_ST: currentAddress = wakeDrSt; return wakeDrStParkingCoord;
-            case WASHINGTON_HALL: currentAddress = washingtonHallLot; return washingtonHallLotCoord;
-            case YATES_DR_ST: currentAddress = yatesDrSt; return yatesDrStParkingCoord;
-            case YATES: currentAddress = yatesLot; return yatesLotCoord;
-            case ZIPCAR_OLD_DOMINION: currentAddress = zipcarOldDominionLot; return zipcarOldDominionLotCoord;
-            case ZIPCAR_WAKE_DR: currentAddress = zipcarWakeDr; return zipcarWakeDrCoord;
+            case BoundaryLot: currentAddress = boundaryLot;return boundaryLotCoord;
+            case JamestownParkingLot: currentAddress = jamestownLot; return jamestownLotCoord;
+            case RichmondLot: currentAddress = richmondLot; return richmondLotCoord;
+            case AdairLot: currentAddress = adairGravelLot; return stadiumDrLotCoord;
+            case AdmissionLot: currentAddress = admissionLot; return admissionLotCoord;
+            case AlumniLot: currentAddress = alumniHouseLot; return alumniHouseLotCoord;
+            case ArmisteadLot: currentAddress = armisteadLot; return armisteadLotCoord;
+            case BoswellLot: currentAddress = boswellLot; return boswellLotCoord;
+            case BridgesLot: currentAddress = bridgesLot; return bridgesLotCoord;
+            case BrooksParking: currentAddress = brooksSt; return brooksStParkingCoord;
+            case BrooksParking2: currentAddress = brooksSt2; return brooksStParking2Coord;
+            case BryanLot: currentAddress = bryanLot; return bryanLotCoord;
+            case CammLot: currentAddress = cammLot; return cammLotCoord;
+            case CollegeTerraceParking: currentAddress = collegeTerraceSt; return collegeTerraceStParkingCoord;
+            case CommonsLot: currentAddress = commonsLot; return commonsLotCoord;
+            case CommuterHouseLot: currentAddress = commuterHouseLot; return commonsLotCoord;
+            case ComptonLot: currentAddress = comptonLot; return comptonLotCoord;
+            case CornerHouseLot: currentAddress = cornerHouseLot; return cornerHouseLotCoord;
+            case DawsonCircleLot: currentAddress = dawsonCircleLot; return dawsonCircleLotCoord;
+            case DillardLot: currentAddress = dillardLot; return dillardLotCoord;
+            case FraternityRearLot: currentAddress = fraternityComplexLot; return fraternityComplexLotCoord;
+            case GraduateLot: currentAddress = gradComplexLot; return gradComplexLotCoord;
+            case GrigsbyParking: currentAddress = grigsbyDrSt; return grigsbyDrStParkingCoord;
+            case HarrisonAvenueLot: currentAddress = harrisonAveLot; return harrisonAveLotCoord;
+            case HuntCircleLot: currentAddress = huntCircleLot; return huntCircleLotCoord;
+            case JamesBlairStreetParking: currentAddress = jamesBlairDrSt; return jamesBlairDrStParkingCoord;
+            case JamesBlairLot: currentAddress = jamesBlairLot; return jamesBlairLotCoord;
+            case JimmyeLaycockParking: currentAddress = jimmyeLaycockCenter; return jimmyeLaycockCenterParkingCoord;
+            case JonesLot: currentAddress = jonesLot; return jonesLotCoord;
+            case KaplanArena: currentAddress = kaplanArenaLot; return kaplanArenaLotCoord;
+            case KeckLabLot: currentAddress = keckLabLot; return keckLabLotCoord;
+            case KeckLabRoadParking: currentAddress = keckLabRd; return keckLabRdParkingCoord;
+            case KingHealthCenterLot: currentAddress = kingHealthCenterLot; return kingHealthCenterLotCoord;
+            case LandrumParking: currentAddress = landrumSt; return landrumStParkingCoord;
+            case LawSchoolLot: currentAddress = lawSchoolLot; return lawSchoolLotCoord;
+            case LegacyCircleLot: currentAddress = legacyCircleLot; return legacyCircleLotCoord;
+            case LudwellLot: currentAddress = ludwellLot; return ludwellLotCoord;
+            case MaintenanceLot: currentAddress = maintenanceLot; return maintenanceLotCoord;
+            case McClurgParking: currentAddress = mcclurgSt; return mcclurgStParkingCoord;
+            case McCormackNagelsenLot: currentAddress = mccormackNagelsenTennisCenterLot; return mccormackNagelsenTennisCenterLotCoord;
+            case McGlothlinStreetHallParkingLot: currentAddress = mcglothlinStHallLot; return mcglothlinStHallLotCoord;
+            case OldDominionLot: currentAddress = oldDominionLot; return oldDominionLotCoord;
+            case ParkingDeck: currentAddress = parkingDeck; return parkingDeckCoord;
+            case PBKLot: currentAddress = phiBetaKappaCircleLot; return phiBetaKappaCircleLotCoord;
+            case PlantLot: currentAddress = plantLot; return plantLotCoord;
+            case PresbyterianLot: currentAddress = presbyterianLot; return presbyterianLotCoord;
+            case RolfeRoadParking: currentAddress = rolfeRdSt; return rolfeRdStParkingCoord;
+            case RoweHouseLot: currentAddress = roweHouseLot; return roweHouseLotCoord;
+            case SadlerCenterLot: currentAddress = sadlerCenterLot; return sadlerCenterLotCoord;
+            case SchoolofEducationLot: currentAddress = schoolOfEducationLot; return schoolOfEducationLotCoord;
+            case SororityCourtLot: currentAddress = sororityCourtLot; return sororityCourtLotCoord;
+            case StadiumDriveLot: currentAddress = stadiumDrLot; return stadiumDrLotCoord;
+            case SwemFaculty: currentAddress = swemFacultyStaffLot; return swemFacultyStaffLotCoord;
+            case SwemLot: currentAddress = swemLot; return swemLotCoord;
+            case TribeSquareLot: currentAddress = tribeSquareLot; return tribeSquareLotCoord;
+            case UkropWayParking: currentAddress = ukropWaySt; return ukropWayStParkingCoord;
+            case VIMSRaleighLot: currentAddress = vimsRaleighLot; return vimsRaleighLotCoord;
+            case VIMSTriangleLots: currentAddress = vimsTriangleLot; return vimsTriangleLotCoord;
+            case WakeDriveParking: currentAddress = wakeDrSt; return wakeDrStParkingCoord;
+            case WashingtonHallLot: currentAddress = washingtonHallLot; return washingtonHallLotCoord;
+            case YatesDriveParking: currentAddress = yatesDrSt; return yatesDrStParkingCoord;
+            case YatesLot: currentAddress = yatesLot; return yatesLotCoord;
+            case ZipcarOldDominionLot: currentAddress = zipcarOldDominionLot; return zipcarOldDominionLotCoord;
+            case ZipcarWakeDrive: currentAddress = zipcarWakeDr; return zipcarWakeDrCoord;
             default: return null;
         }
     }
@@ -322,6 +322,7 @@ public class Map extends Fragment {
     }
 
     public hardcodedLocations getLocation(){return currentLocation;}
+
     public void addMarkerAtCurrentLocation(){
         parkedLocation = currentLocation;
         if (hasAddedMarker){
@@ -338,156 +339,156 @@ public class Map extends Fragment {
     }
 
     enum hardcodedLocations{
-        BOUNDARY, JAMESTOWN, RICHMOND, ADAIR_GRAVE, ADMISSION,
-        ALUMNI_HOUSE, ARMISTEAD, BOSWELL, BRIDGES, BROOKS_ST, BROOKS_ST2,
-        BRYAN, CAMM, COLLEGE_TERRACE_ST, COMMONS, COMMUTER_HOUSE, COMPTON,
-        CORNER_HOUSE, DAWSON_CIRCLE, DILLARD, FRATERNITY_COMPLEX, GRAD_COMPLEX,
-        GRIGSBY_DR_ST, HARRISION_AVE, HUNT_CIRCLE, JAMES_BLAIR_ST, JAMES_BLAIR,
-        JIMMYE_LAYCOCK_CENTER, JONES, KAPLAN_ARENA, KECK_LAB, KECK_LAB_RD,
-        KING_HEALTH_CENTER, LANDRUM_ST, LAW_SCHOOL, LEGACY_CIRCLE, LUDWELL,
-        MAINTENANCE, MCCLURG_ST, MCCORMACK_NAGELSEN_TENNIS_CENTER, MCGLOTHLIN_ST_HALL,
-        OLD_DOMINION, PARKING_DECK, PHI_BETA_KAPPA_CIRCLE, PLANT, PRESBYTERIAN,
-        ROLFE_RD_ST, ROWE_HOUSE, SADLER_CENTER, SCHOOL_OF_EDUCATION, SORORITY_COURT,
-        STADIUM_DR, SWEM_FACULTY_STAFF, SWEM, TRIBE_SQUARE, UKROP_WAY_ST, VIMS_RALEIGH,
-        VIMS_TRIANGLE, WAKE_DR_ST, WASHINGTON_HALL, YATES_DR_ST, YATES, ZIPCAR_OLD_DOMINION,
-        ZIPCAR_WAKE_DR
+        BoundaryLot, JamestownParkingLot, RichmondLot, AdairLot, AdmissionLot,
+        AlumniLot, ArmisteadLot, BoswellLot, BridgesLot, BrooksParking, BrooksParking2,
+        BryanLot, CammLot, CollegeTerraceParking, CommonsLot, CommuterHouseLot, ComptonLot,
+        CornerHouseLot, DawsonCircleLot, DillardLot, FraternityRearLot, GraduateLot,
+        GrigsbyParking, HarrisonAvenueLot, HuntCircleLot, JamesBlairStreetParking, JamesBlairLot,
+        JimmyeLaycockParking, JonesLot, KaplanArena, KeckLabLot, KeckLabRoadParking,
+        KingHealthCenterLot, LandrumParking, LawSchoolLot, LegacyCircleLot, LudwellLot,
+        MaintenanceLot, McClurgParking, McCormackNagelsenLot, McGlothlinStreetHallParkingLot,
+       OldDominionLot, ParkingDeck, PBKLot, PlantLot, PresbyterianLot,
+        RolfeRoadParking, RoweHouseLot, SadlerCenterLot, SchoolofEducationLot, SororityCourtLot,
+        StadiumDriveLot, SwemFaculty, SwemLot, TribeSquareLot, UkropWayParking, VIMSRaleighLot,
+        VIMSTriangleLots, WakeDriveParking, WashingtonHallLot, YatesDriveParking, YatesLot, ZipcarOldDominionLot,
+        ZipcarWakeDrive
     }
 
     public String getCurrentDesinationAddress(){
         switch (currentLocation){
-            case BOUNDARY: return boundaryLot;
-            case JAMESTOWN: return jamestownLot;
-            case RICHMOND: return richmondLot;
-            case ADAIR_GRAVE: return adairGravelLot;
-            case ADMISSION: return admissionLot;
-            case ALUMNI_HOUSE: return alumniHouseLot;
-            case ARMISTEAD: return armisteadLot;
-            case BOSWELL: return boswellLot;
-            case BRIDGES: return bridgesLot;
-            case BROOKS_ST: return brooksSt;
-            case BROOKS_ST2: return brooksSt2;
-            case BRYAN: return bryanLot;
-            case CAMM: return cammLot;
-            case COLLEGE_TERRACE_ST: return collegeTerraceSt;
-            case COMMONS: return commonsLot;
-            case COMMUTER_HOUSE: return commuterHouseLot;
-            case COMPTON: return comptonLot;
-            case CORNER_HOUSE: return cornerHouseLot;
-            case DAWSON_CIRCLE: return dawsonCircleLot;
-            case DILLARD: return dillardLot;
-            case FRATERNITY_COMPLEX: return fraternityComplexLot;
-            case GRAD_COMPLEX: return gradComplexLot;
-            case GRIGSBY_DR_ST: return grigsbyDrSt;
-            case HARRISION_AVE: return harrisonAveLot;
-            case HUNT_CIRCLE: return huntCircleLot;
-            case JAMES_BLAIR_ST: return jamesBlairDrSt;
-            case JAMES_BLAIR: return jamesBlairLot;
-            case JIMMYE_LAYCOCK_CENTER: return jimmyeLaycockCenter;
-            case JONES: return jonesLot;
-            case KAPLAN_ARENA: return kaplanArenaLot;
-            case KECK_LAB: return keckLabLot;
-            case KECK_LAB_RD: return keckLabRd;
-            case KING_HEALTH_CENTER: return kingHealthCenterLot;
-            case LANDRUM_ST: return landrumSt;
-            case LAW_SCHOOL: return lawSchoolLot;
-            case LEGACY_CIRCLE: return legacyCircleLot;
-            case LUDWELL: return ludwellLot;
-            case MAINTENANCE: return maintenanceLot;
-            case MCCLURG_ST: return mcclurgSt;
-            case MCCORMACK_NAGELSEN_TENNIS_CENTER: return mccormackNagelsenTennisCenterLot;
-            case MCGLOTHLIN_ST_HALL: return mcglothlinStHallLot;
-            case OLD_DOMINION: return oldDominionLot;
-            case PARKING_DECK: return parkingDeck;
-            case PHI_BETA_KAPPA_CIRCLE: return phiBetaKappaCircleLot;
-            case PLANT: return plantLot;
-            case PRESBYTERIAN: return presbyterianLot;
-            case ROLFE_RD_ST: return rolfeRdSt;
-            case ROWE_HOUSE: return roweHouseLot;
-            case SADLER_CENTER: return sadlerCenterLot;
-            case SCHOOL_OF_EDUCATION: return schoolOfEducationLot;
-            case SORORITY_COURT: return sororityCourtLot;
-            case STADIUM_DR: return stadiumDrLot;
-            case SWEM_FACULTY_STAFF: return swemFacultyStaffLot;
-            case SWEM: return swemLot;
-            case TRIBE_SQUARE: return tribeSquareLot;
-            case UKROP_WAY_ST: return ukropWaySt;
-            case VIMS_RALEIGH: return vimsRaleighLot;
-            case VIMS_TRIANGLE: return vimsTriangleLot;
-            case WAKE_DR_ST: return wakeDrSt;
-            case WASHINGTON_HALL: return washingtonHallLot;
-            case YATES_DR_ST: return yatesDrSt;
-            case YATES: return yatesLot;
-            case ZIPCAR_OLD_DOMINION: return zipcarOldDominionLot;
-            case ZIPCAR_WAKE_DR: return zipcarWakeDr;
+            case BoundaryLot: return boundaryLot;
+            case JamestownParkingLot: return jamestownLot;
+            case RichmondLot: return richmondLot;
+            case AdairLot: return adairGravelLot;
+            case AdmissionLot: return admissionLot;
+            case AlumniLot: return alumniHouseLot;
+            case ArmisteadLot: return armisteadLot;
+            case BoswellLot: return boswellLot;
+            case BridgesLot: return bridgesLot;
+            case BrooksParking: return brooksSt;
+            case BrooksParking2: return brooksSt2;
+            case BryanLot: return bryanLot;
+            case CammLot: return cammLot;
+            case CollegeTerraceParking: return collegeTerraceSt;
+            case CommonsLot: return commonsLot;
+            case CommuterHouseLot: return commuterHouseLot;
+            case ComptonLot: return comptonLot;
+            case CornerHouseLot: return cornerHouseLot;
+            case DawsonCircleLot: return dawsonCircleLot;
+            case DillardLot: return dillardLot;
+            case FraternityRearLot: return fraternityComplexLot;
+            case GraduateLot: return gradComplexLot;
+            case GrigsbyParking: return grigsbyDrSt;
+            case HarrisonAvenueLot: return harrisonAveLot;
+            case HuntCircleLot: return huntCircleLot;
+            case JamesBlairStreetParking: return jamesBlairDrSt;
+            case JamesBlairLot: return jamesBlairLot;
+            case JimmyeLaycockParking: return jimmyeLaycockCenter;
+            case JonesLot: return jonesLot;
+            case KaplanArena: return kaplanArenaLot;
+            case KeckLabLot: return keckLabLot;
+            case KeckLabRoadParking: return keckLabRd;
+            case KingHealthCenterLot: return kingHealthCenterLot;
+            case LandrumParking: return landrumSt;
+            case LawSchoolLot: return lawSchoolLot;
+            case LegacyCircleLot: return legacyCircleLot;
+            case LudwellLot: return ludwellLot;
+            case MaintenanceLot: return maintenanceLot;
+            case McClurgParking: return mcclurgSt;
+            case McCormackNagelsenLot: return mccormackNagelsenTennisCenterLot;
+            case McGlothlinStreetHallParkingLot: return mcglothlinStHallLot;
+            case OldDominionLot: return oldDominionLot;
+            case ParkingDeck: return parkingDeck;
+            case PBKLot: return phiBetaKappaCircleLot;
+            case PlantLot: return plantLot;
+            case PresbyterianLot: return presbyterianLot;
+            case RolfeRoadParking: return rolfeRdSt;
+            case RoweHouseLot: return roweHouseLot;
+            case SadlerCenterLot: return sadlerCenterLot;
+            case SchoolofEducationLot: return schoolOfEducationLot;
+            case SororityCourtLot: return sororityCourtLot;
+            case StadiumDriveLot: return stadiumDrLot;
+            case SwemFaculty: return swemFacultyStaffLot;
+            case SwemLot: return swemLot;
+            case TribeSquareLot: return tribeSquareLot;
+            case UkropWayParking: return ukropWaySt;
+            case VIMSRaleighLot: return vimsRaleighLot;
+            case VIMSTriangleLots: return vimsTriangleLot;
+            case WakeDriveParking: return wakeDrSt;
+            case WashingtonHallLot: return washingtonHallLot;
+            case YatesDriveParking: return yatesDrSt;
+            case YatesLot: return yatesLot;
+            case ZipcarOldDominionLot: return zipcarOldDominionLot;
+            case ZipcarWakeDrive: return zipcarWakeDr;
             default: return "Not Set";
         }
     }
     public String getCurrentParkedAddress(){
         switch (currentLocation){
-            case BOUNDARY: return boundaryLot;
-            case JAMESTOWN: return jamestownLot;
-            case RICHMOND: return richmondLot;
-            case ADAIR_GRAVE: return adairGravelLot;
-            case ADMISSION: return admissionLot;
-            case ALUMNI_HOUSE: return alumniHouseLot;
-            case ARMISTEAD: return armisteadLot;
-            case BOSWELL: return boswellLot;
-            case BRIDGES: return bridgesLot;
-            case BROOKS_ST: return brooksSt;
-            case BROOKS_ST2: return brooksSt2;
-            case BRYAN: return bryanLot;
-            case CAMM: return cammLot;
-            case COLLEGE_TERRACE_ST: return collegeTerraceSt;
-            case COMMONS: return commonsLot;
-            case COMMUTER_HOUSE: return commuterHouseLot;
-            case COMPTON: return comptonLot;
-            case CORNER_HOUSE: return cornerHouseLot;
-            case DAWSON_CIRCLE: return dawsonCircleLot;
-            case DILLARD: return dillardLot;
-            case FRATERNITY_COMPLEX: return fraternityComplexLot;
-            case GRAD_COMPLEX: return gradComplexLot;
-            case GRIGSBY_DR_ST: return grigsbyDrSt;
-            case HARRISION_AVE: return harrisonAveLot;
-            case HUNT_CIRCLE: return huntCircleLot;
-            case JAMES_BLAIR_ST: return jamesBlairDrSt;
-            case JAMES_BLAIR: return jamesBlairLot;
-            case JIMMYE_LAYCOCK_CENTER: return jimmyeLaycockCenter;
-            case JONES: return jonesLot;
-            case KAPLAN_ARENA: return kaplanArenaLot;
-            case KECK_LAB: return keckLabLot;
-            case KECK_LAB_RD: return keckLabRd;
-            case KING_HEALTH_CENTER: return kingHealthCenterLot;
-            case LANDRUM_ST: return landrumSt;
-            case LAW_SCHOOL: return lawSchoolLot;
-            case LEGACY_CIRCLE: return legacyCircleLot;
-            case LUDWELL: return ludwellLot;
-            case MAINTENANCE: return maintenanceLot;
-            case MCCLURG_ST: return mcclurgSt;
-            case MCCORMACK_NAGELSEN_TENNIS_CENTER: return mccormackNagelsenTennisCenterLot;
-            case MCGLOTHLIN_ST_HALL: return mcglothlinStHallLot;
-            case OLD_DOMINION: return oldDominionLot;
-            case PARKING_DECK: return parkingDeck;
-            case PHI_BETA_KAPPA_CIRCLE: return phiBetaKappaCircleLot;
-            case PLANT: return plantLot;
-            case PRESBYTERIAN: return presbyterianLot;
-            case ROLFE_RD_ST: return rolfeRdSt;
-            case ROWE_HOUSE: return roweHouseLot;
-            case SADLER_CENTER: return sadlerCenterLot;
-            case SCHOOL_OF_EDUCATION: return schoolOfEducationLot;
-            case SORORITY_COURT: return sororityCourtLot;
-            case STADIUM_DR: return stadiumDrLot;
-            case SWEM_FACULTY_STAFF: return swemFacultyStaffLot;
-            case SWEM: return swemLot;
-            case TRIBE_SQUARE: return tribeSquareLot;
-            case UKROP_WAY_ST: return ukropWaySt;
-            case VIMS_RALEIGH: return vimsRaleighLot;
-            case VIMS_TRIANGLE: return vimsTriangleLot;
-            case WAKE_DR_ST: return wakeDrSt;
-            case WASHINGTON_HALL: return washingtonHallLot;
-            case YATES_DR_ST: return yatesDrSt;
-            case YATES: return yatesLot;
-            case ZIPCAR_OLD_DOMINION: return zipcarOldDominionLot;
-            case ZIPCAR_WAKE_DR: return zipcarWakeDr;
+            case BoundaryLot: return boundaryLot;
+            case JamestownParkingLot: return jamestownLot;
+            case RichmondLot: return richmondLot;
+            case AdairLot: return adairGravelLot;
+            case AdmissionLot: return admissionLot;
+            case AlumniLot: return alumniHouseLot;
+            case ArmisteadLot: return armisteadLot;
+            case BoswellLot: return boswellLot;
+            case BridgesLot: return bridgesLot;
+            case BrooksParking: return brooksSt;
+            case BrooksParking2: return brooksSt2;
+            case BryanLot: return bryanLot;
+            case CammLot: return cammLot;
+            case CollegeTerraceParking: return collegeTerraceSt;
+            case CommonsLot: return commonsLot;
+            case CommuterHouseLot: return commuterHouseLot;
+            case ComptonLot: return comptonLot;
+            case CornerHouseLot: return cornerHouseLot;
+            case DawsonCircleLot: return dawsonCircleLot;
+            case DillardLot: return dillardLot;
+            case FraternityRearLot: return fraternityComplexLot;
+            case GraduateLot: return gradComplexLot;
+            case GrigsbyParking: return grigsbyDrSt;
+            case HarrisonAvenueLot: return harrisonAveLot;
+            case HuntCircleLot: return huntCircleLot;
+            case JamesBlairStreetParking: return jamesBlairDrSt;
+            case JamesBlairLot: return jamesBlairLot;
+            case JimmyeLaycockParking: return jimmyeLaycockCenter;
+            case JonesLot: return jonesLot;
+            case KaplanArena: return kaplanArenaLot;
+            case KeckLabLot: return keckLabLot;
+            case KeckLabRoadParking: return keckLabRd;
+            case KingHealthCenterLot: return kingHealthCenterLot;
+            case LandrumParking: return landrumSt;
+            case LawSchoolLot: return lawSchoolLot;
+            case LegacyCircleLot: return legacyCircleLot;
+            case LudwellLot: return ludwellLot;
+            case MaintenanceLot: return maintenanceLot;
+            case McClurgParking: return mcclurgSt;
+            case McCormackNagelsenLot: return mccormackNagelsenTennisCenterLot;
+            case McGlothlinStreetHallParkingLot: return mcglothlinStHallLot;
+            case OldDominionLot: return oldDominionLot;
+            case ParkingDeck: return parkingDeck;
+            case PBKLot: return phiBetaKappaCircleLot;
+            case PlantLot: return plantLot;
+            case PresbyterianLot: return presbyterianLot;
+            case RolfeRoadParking: return rolfeRdSt;
+            case RoweHouseLot: return roweHouseLot;
+            case SadlerCenterLot: return sadlerCenterLot;
+            case SchoolofEducationLot: return schoolOfEducationLot;
+            case SororityCourtLot: return sororityCourtLot;
+            case StadiumDriveLot: return stadiumDrLot;
+            case SwemFaculty: return swemFacultyStaffLot;
+            case SwemLot: return swemLot;
+            case TribeSquareLot: return tribeSquareLot;
+            case UkropWayParking: return ukropWaySt;
+            case VIMSRaleighLot: return vimsRaleighLot;
+            case VIMSTriangleLots: return vimsTriangleLot;
+            case WakeDriveParking: return wakeDrSt;
+            case WashingtonHallLot: return washingtonHallLot;
+            case YatesDriveParking: return yatesDrSt;
+            case YatesLot: return yatesLot;
+            case ZipcarOldDominionLot: return zipcarOldDominionLot;
+            case ZipcarWakeDrive: return zipcarWakeDr;
             default: return "Not Set";
         }
     }
@@ -513,15 +514,7 @@ public class Map extends Fragment {
     }
 
     public LatLng getDestinationLatLng(){
-        if (this.currentLocation == hardcodedLocations.KAPLAN_ARENA){
-            return this.kaplanArenaLotCoord;
-        }
-        else if (this.currentLocation == hardcodedLocations.PARKING_DECK){
-            return this.parkingDeckCoord;
-        }
-        else{
-            return null;
-        }
+        return getCurrentLocation();
     }
 }
 

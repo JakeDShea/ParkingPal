@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class ChoosePermit extends AppCompatActivity {
 
         //TODO - Connect id to exsisting id and changed the parking pass status.
 
+        Button done = findViewById(R.id.login);
 
         Spinner spinner = (Spinner) findViewById(R.id.permit_spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -49,8 +51,19 @@ public class ChoosePermit extends AppCompatActivity {
 
             }
         });
+
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMapscreenActivity();
+            }
+        });
     }
 
-
+    public void openMapscreenActivity(){
+        // Sets up the intent of this method with values to pass along
+        Intent intent = new Intent(this, MapscreenActivity.class);
+        startActivity(intent);
+    }
 
 }
