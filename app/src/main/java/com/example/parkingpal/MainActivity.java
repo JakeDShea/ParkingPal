@@ -70,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
                 user = new Users();
                 info = new Users.Info();
-                user.setID(Integer.parseInt(ed1.getText().toString()));
+                if(!ed1.getText().toString().isEmpty()){
+                    user.setID(Integer.parseInt(ed1.getText().toString()));
+                }
                 //info.setEmail(ed1.getText().toString());
 
 
