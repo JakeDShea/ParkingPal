@@ -46,6 +46,11 @@ public class MapscreenActivity extends AppCompatActivity {
         pickLot.setSelection(0);
         Button setParkingLocation = findViewById(R.id.setParkingLocation);
 
+        // Defaults the permit text
+        ((TextView) findViewById(R.id.permit)).setText("Permit: DEFAULT");
+        // Finds saved permit type
+        ((TextView) findViewById(R.id.permit)).setText("Permit: " + getIntent().getExtras().get("PERMIT").toString());
+
         (myRef.child("Parking Locations")).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
