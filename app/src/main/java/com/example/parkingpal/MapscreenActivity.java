@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -107,6 +109,7 @@ public class MapscreenActivity extends AppCompatActivity {
                                 dest.setText("DESTINATION: " + fragment.getCurrentDesinationAddress());
                                 getCarsInLot(lotName);
                                 getTotalSpots(lotName);
+                                parkingLocationAllowsUserPass(lotName);
                                 updateDistance();
                             }
 
@@ -148,7 +151,43 @@ public class MapscreenActivity extends AppCompatActivity {
 
     }
 
+    public boolean parkingLocationAllowsUserPass(String lotName){
+        DatabaseReference lotPasses = FirebaseDatabase.getInstance().getReference().child("Parking Locations").child(lotName).child("PassRequired");
+        lotPasses.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                //if the data retreival failed, exit
+                boolean passFound = false;
+                if (!task.isSuccessful()){
+                    return;
+                }
+                for(DataSnapshot pass : task.getResult().getChildren()){
+                    System.out.println("Pass comparison");
+                    System.out.println(pass.getValue().toString());
+                    System.out.println(getIntent().getExtras().get("PERMIT").toString());
+                    if (pass.getValue().toString().equals(mapUserPassToDatabaseFormat())){
+                        passFound = true;
+                    }
+                }
+                //this means the pass accepts any
+                TextView parkingPassAllowed = findViewById(R.id.allowed);
+                if(!task.getResult().hasChildren()){
+                    passFound = true;
+                }
+                if (passFound){
+                    System.out.println("PASS FOUND");
+                    parkingPassAllowed.setText("ALLOWED");
+                }
+                else{
+                    System.out.println("PASS NOT FONUD");
+                    parkingPassAllowed.setText("NOT ALLOWED");
+                }
 
+            }
+        });
+
+        return false;
+    }
 
     public void getCarsInLot(String lotName){
         DatabaseReference carsInArea = FirebaseDatabase.getInstance().getReference().
@@ -194,5 +233,26 @@ public class MapscreenActivity extends AppCompatActivity {
         float distance = fragment.getDistanceToDestinationFromCurrent(fragment.getDestinationLatLng());
         String dist = String.valueOf(distance);
         distanceText.setText("DISTANCE: " + dist + " meters");
+    }
+
+    private String mapUserPassToDatabaseFormat(){
+        String userPass = getIntent().getExtras().get("PERMIT").toString();
+        String toReturn;
+        if (userPass.equals("COMMUTER - DAY") || userPass.equals("COMMUTER - EVENING")){
+            toReturn = "Commuter";
+        }
+        else if(userPass.equals("CARPOOL")){
+            toReturn = "Carpool";
+        }
+        else if(userPass.equals("FACULTY/STAFF")){
+            toReturn = "Faculty and Staff";
+        }
+        else if(userPass.equals("RESIDENT")){
+            toReturn = "Resident";
+        }
+        else{
+            return "notImplemented, sorry :)";
+        }
+        return toReturn;
     }
 }
