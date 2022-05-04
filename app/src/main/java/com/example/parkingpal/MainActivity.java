@@ -70,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
                 user = new Users();
                 info = new Users.Info();
-                info.setEmail(ed1.getText().toString());
+                user.setID(Integer.parseInt(ed1.getText().toString()));
+                //info.setEmail(ed1.getText().toString());
+
 
                 // Check if credential exist
 
@@ -78,33 +80,33 @@ public class MainActivity extends AppCompatActivity {
                 String password = ed2.getText().toString();
 
                 // Gets bare minimum values needed to move on!!! Can add later
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//
+//                            // This user has the email in question
+//                            if(snapshot.child("email").getValue().toString().equals(username))
+//                            {
+//                                // Correct credentials
+//                                if(snapshot.child("password").getValue().toString().equals(password))
+//                                {
+//                                    permitType = snapshot.child("permit").getValue().toString();
+//                                    openMapscreenActivity();
+//                                }
+//                            }
+//                        }
+//
+//                        // Only happens if user could not log in with given username/password
+//                        Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+//                    }
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
 
-                            // This user has the email in question
-                            if(snapshot.child("email").getValue().toString().equals(username))
-                            {
-                                // Correct credentials
-                                if(snapshot.child("password").getValue().toString().equals(password))
-                                {
-                                    permitType = snapshot.child("permit").getValue().toString();
-                                    openMapscreenActivity();
-                                }
-                            }
-                        }
 
-                        // Only happens if user could not log in with given username/password
-                        Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-/*
                 //Read inputted username
                 // currently in database:
                 // username: 1527
@@ -112,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        readData(user, info.getEmail());
-                        openMapscreenActivity();
+                        readData(user);
                     }
 
                     @Override
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-*/
+
 //                if (ed1.getText().toString().equals("admin") &&
 //                        ed2.getText().toString().equals("admin")) {
 //                    Toast.makeText(getApplicationContext(),
@@ -167,8 +168,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Populates user/info class with database information.
-    public void readData(Users user, String email){
-        myRef.child(email).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+    public void readData(Users user){
+        myRef.child(String.valueOf(user.getID())).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -187,8 +188,10 @@ public class MainActivity extends AppCompatActivity {
                         if(info.getPassword().equals(pass)){
                             //This needs to change to whatever activity comes after this.
                             //This is here to just check to see if it is working.
-                            //openParkActivity();
-                            openMapscreenActivity();
+//                            openParkActivity();
+                            Intent intent = new Intent(getApplicationContext(), MapscreenActivity.class);
+                            intent.putExtra("PERMIT", info.getPass());
+                            startActivity(intent);
                         }
 
                         else{
@@ -198,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     else {
-                        Toast.makeText(getApplicationContext(), "User does not exsist", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "failed to read", Toast.LENGTH_SHORT).show();

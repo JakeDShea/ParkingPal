@@ -35,7 +35,7 @@ public class Users{
         private String university;
         private String passExpiration;
         private String password;
-        private String permit;
+//        private String permit;
 
         public Info() {
             location = "Default";
@@ -45,7 +45,7 @@ public class Users{
             university = "Default";
             passExpiration = "Default";
             password = "Default";
-            permit = "Default";
+//            permit = "Default";
         }
 
         public Info(String location,String name,String pass, String email, String university, String passExpiration, String password) {

@@ -32,8 +32,6 @@ public class ChoosePermit extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("ID");
 
-        //TODO - Connect id to exsisting id and changed the parking pass status.
-
         // Get the database again
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
@@ -59,7 +57,7 @@ public class ChoosePermit extends AppCompatActivity {
                 Log.v("ID", id);
 
                 // actually moves the permit into the database
-                myRef.child("Users").child(id).child("permit").setValue(permitType);
+                myRef.child("Users").child(id).child("pass").setValue(permitType);
             }
 
             @Override

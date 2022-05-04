@@ -97,19 +97,7 @@ public class CreateAccount extends AppCompatActivity {
                 myRef.child(String.valueOf(user.getID())).setValue(user.getInfo());
                 //when next button is clicked, user is brought to the screen to choose their permit type
                 Intent intent = new Intent(getApplicationContext(), ChoosePermit.class);
-
-                //Temp intents to pass I don't think we need to pass everything just create what we can create here then modify later.
-                //We need the id to find the user we just created.
-//                intent.putExtra("first", fN.getText().toString());
-//                intent.putExtra("last", lN.getText().toString());
-//                intent.putExtra("email", email.getText().toString());
-//                intent.putExtra("password", password.getText().toString());
-//                intent.putExtra("university", university.getText().toString());
                 intent.putExtra("ID", String.valueOf(user.getID()));
-//                intent.putExtra("", fN.getText().toString());
-//                intent.putExtra("first", fN.getText().toString());
-
-
                 startActivity(intent);
             }
             @Override
