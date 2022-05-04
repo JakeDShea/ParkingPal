@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private Button button2;
 
+    private String permitType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +74,37 @@ public class MainActivity extends AppCompatActivity {
 
                 // Check if credential exist
 
+                String username = ed1.getText().toString();
+                String password = ed2.getText().toString();
 
+                // Gets bare minimum values needed to move on!!! Can add later
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
+                            // This user has the email in question
+                            if(snapshot.child("email").getValue().toString().equals(username))
+                            {
+                                // Correct credentials
+                                if(snapshot.child("password").getValue().toString().equals(password))
+                                {
+                                    permitType = snapshot.child("permit").getValue().toString();
+                                    openMapscreenActivity();
+                                }
+                            }
+                        }
+
+                        // Only happens if user could not log in with given username/password
+                        Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+/*
                 //Read inputted username
                 // currently in database:
                 // username: 1527
@@ -90,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
+*/
 //                if (ed1.getText().toString().equals("admin") &&
 //                        ed2.getText().toString().equals("admin")) {
 //                    Toast.makeText(getApplicationContext(),
@@ -199,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
     public void openMapscreenActivity(){
         // Sets up the intent of this method with values to pass along
         Intent intent = new Intent(this, MapscreenActivity.class);
+        intent.putExtra("PERMIT", permitType);
         startActivity(intent);
     }
 
