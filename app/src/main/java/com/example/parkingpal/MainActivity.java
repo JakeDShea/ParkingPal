@@ -70,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 info = new Users.Info();
                 info.setEmail(ed1.getText().toString());
 
+                // Check if credential exist
+
+
+
                 //Read inputted username
                 // currently in database:
                 // username: 1527
