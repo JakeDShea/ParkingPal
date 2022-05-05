@@ -1,0 +1,14 @@
+Our application uses Google maps API to recreate some of the functionality of Google Maps. This includes the maps API for displaying a map and the directions API for instructing the user where they need to drive. This article describes the process of implementing these features in an Android application. 
+
+https://developers.google.com/maps/documentation/android-sdk/start
+
+
+
+Highest layer: Android XML files. These define the UI and appearance of the application. 
+Next layer: Android Java files. These define the bahavior of the screens. 
+Next layer: Database. To retrieve information about user accounts and parking availability. 
+
+For more information, there are articles describing the structured 
+
+Code reviews will be conducted from the 
+
