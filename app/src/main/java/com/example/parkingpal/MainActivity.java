@@ -70,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
                 user = new Users();
                 info = new Users.Info();
-                if(!ed1.getText().toString().isEmpty()){
-                    user.setID(Integer.parseInt(ed1.getText().toString()));
-                }
+                //if(!ed1.getText().toString().isEmpty()){
+                //    user.setID(Integer.parseInt(ed1.getText().toString()));
+                //}
                 //info.setEmail(ed1.getText().toString());
 
 
@@ -82,31 +82,33 @@ public class MainActivity extends AppCompatActivity {
                 String password = ed2.getText().toString();
 
                 // Gets bare minimum values needed to move on!!! Can add later
-//                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//
-//                            // This user has the email in question
-//                            if(snapshot.child("email").getValue().toString().equals(username))
-//                            {
-//                                // Correct credentials
-//                                if(snapshot.child("password").getValue().toString().equals(password))
-//                                {
-//                                    permitType = snapshot.child("permit").getValue().toString();
-//                                    openMapscreenActivity();
-//                                }
-//                            }
-//                        }
-//
-//                        // Only happens if user could not log in with given username/password
-//                        Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                            // This user has the email in question
+                            if(snapshot.child("email").getValue().toString().equals(username))
+                            {
+                                // Correct credentials
+                                if(snapshot.child("password").getValue().toString().equals(password))
+                                {
+                                    permitType = snapshot.child("permit").getValue().toString();
+                                    openMapscreenActivity();
+                                }
+                                else
+                                {
+                                    // Only happens if user could not log in with given username/password
+                                    Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
                 //Read inputted username
